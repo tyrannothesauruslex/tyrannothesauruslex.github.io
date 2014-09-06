@@ -1,97 +1,161 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=640">
+    <head>
+    <meta charset=utf-8 />
+    <title>AutoThes</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+        
+        <link rel="stylesheet" href="assets/normalize.css">
+        <link rel="stylesheet" href="assets/style.css">
+        <link href='http://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
 
-    <link rel="stylesheet" href="stylesheets/core.css" media="screen">
-    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+        <script src="http://static.smallpicture.com/bootstrap/js/jquery-1.9.1.min.js"></script>
+        <script src="assets/handlebars.js"></script>
+        <script src="assets/typeahead.bundle.js"></script>
+        <!-- <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script> -->
+        <script src="assets/index.js"></script>
 
-    <script type="text/javascript" src="javascripts/modernizr.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $('#main_content').headsmart()
-      })
-    </script>
-    <title>Tyrannothesauruslex.github.io by tyrannothesauruslex</title>
-  </head>
+        <style>
 
-  <body>
-    <a id="forkme_banner" href="https://github.com/tyrannothesauruslex">View on GitHub</a>
-    <div class="shell">
+            html, body {
+                width: 100%;
+                height: 100%;
+            }
 
-      <header>
-        <span class="ribbon-outer">
-          <span class="ribbon-inner">
-            <h1>Tyrannothesauruslex.github.io</h1>
-            <h2>don&#39;t make me click</h2>
-          </span>
-          <span class="left-tail"></span>
-          <span class="right-tail"></span>
-        </span>
-      </header>
+            /*
+            .divPage {
+                width: 50%;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 100px;
+                border: 1px solid silver;
+                background-color: whitesmoke;
+                padding-left: 15px;
+                }*/
 
-      <div id="no-downloads">
-        <span class="inner">
-        </span>
-      </div>
+            /*.tt-dataset-foo {*/
+            .tt-suggestion {
+                border: 0px dotted gray;
+                padding: 0px;
+                padding-left: 42px;
+                font-size: 16px;
+                /*width: 80%;*/
+                white-space: normal !important;
+                width: 100%;
+                white-space: pre-wrap; 
+                word-wrap: break-word;
+                display: block !important;
+                -webkit-hyphens: auto;
+                   -moz-hyphens: auto;
+                        hyphens: auto;   
 
+                /*position: fixed;
+                bottom: 10px;
+                left: 10px;*/
+            }
 
-      <span class="banner-fix"></span>
+            /*input[type='textarea'] {
+                width: 80%;
+            }*/
 
+            span.twitter-typeahead {
+                /*width: 80%;*/
+                width: 100%;
 
-      <section id="main_content">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+            }
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+            .syn {
+                color: gray;
+            }
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+            /*#results {
+                position: fixed;
+                top: 100px;
+                left: 10px;
+            }
+*/
+            #your_word {
+                border: 0px dotted red;
+                /*text-align: top;*/
+                height: 200px;
+                width: 100%;
+                font-family: 'Satisfy';
+                font-size: 24px;
+                /*vertical-align: baseline;*/
+                padding: 8px;
+                padding-left: 42px;
+            }
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+            /*.tt-dataset-foo {
+                position: fixed;
+                top: 100px;
+                left: 10px;
+                z-index: 9;     
+                border: 1px dotted red;           
+            }
+            
+            .tt-dataset-foo2 {
+                position: fixed;
+                top: 100px;
+                left: 10px;
+                z-index: 9;     
+                border: 1px dotted red;           
+            }*/
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+            .transparent {
+                background: transparent;
+                border: 0px solid #d2d2d2;
+                resize: none;
+                outline: none;
+            }
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+            p {
+                margins: 0px !important;
+                -webkit-margin-before:0.5em;
+                -webkit-margin-after:0.5em;                
+            }
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+        </style>
+    </head>
+<body>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-
-      <footer>
-        <span class="ribbon-outer">
-          <span class="ribbon-inner">
-            <p>Projects by <a href="https://github.com/tyrannothesauruslex">tyrannothesauruslex</a> can be found on <a href="https://github.com/tyrannothesauruslex">GitHub</a></p>
-          </span>
-          <span class="left-tail"></span>
-          <span class="right-tail"></span>
-        </span>
-        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
-        <span class="octocat"></span>
-      </footer>
+    <div class="paper">
+        <textarea id="your_word" class="typeahead transparent" type="textarea" name="query"></textarea>
+        
+<!--         <div id="results">
+            <div id="idSynonymList"></div>
+            <div id="idDefList"></div>
+        </div> -->
 
     </div>
+        <!-- 
+ <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;">
+    <textarea class="typeahead transparent tt-hint" type="textarea" readonly="" autocomplete="off" spellcheck="false" tabindex="-1" style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; opacity: 1; background: none 0% 0% / auto repeat scroll padding-box border-box rgba(0, 0, 0, 0);"></textarea>
+    <textarea id="your_word" class="typeahead transparent tt-input" type="textarea" name="query" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;"></textarea>
 
-    
-  </body>
+    <pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: Satisfy; font-size: 24px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;">cute</pre>
+
+    <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: block; right: auto;">
+
+    <div class="tt-dataset-foo">
+        <span class="tt-suggestions" style="display: block;">
+            <div class="tt-suggestion">
+                <p style="white-space: normal;">
+                    <span class="syn">clever</span>,
+                    <span class="syn">sharp</span>,
+                    <span class="syn">shrewd</span>,
+                    <span class="syn">ingenious</span>,
+                    <span class="syn">cunning</span>
+                </p>
+            </div>
+        </span>
+    </div>
+
+    <div class="tt-dataset-foo2"><span class="tt-suggestions" style="display: block;"><div class="tt-suggestion"><p style="white-space: normal;">Delightfully pretty or dainty.</p></div><div class="tt-suggestion"><p style="white-space: normal;">Obviously contrived to charm; precious: "[He] mugs so ferociously he kills the humor—it's an insufferably cute performance”  ( David Ansen). </p></div><div class="tt-suggestion tt-cursor"><p style="white-space: normal;">Shrewd; clever.</p></div></span>
+    </div>
+    </span>
+</span> -->
+
+
+    </body>
 </html>
