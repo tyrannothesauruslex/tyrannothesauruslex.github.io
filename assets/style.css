@@ -71,7 +71,8 @@ html, body {
     /*width: 80%;*/
     white-space: normal !important;
     width: 100% !important;
-    white-space: pre-wrap; 
+    /* white-space: pre-wrap;  */
+    white-space: normal; 
     word-wrap: break-word;
     display: block !important;
     -webkit-hyphens: auto;
