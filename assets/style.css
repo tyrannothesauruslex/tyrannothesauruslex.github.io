@@ -46,3 +46,93 @@
     border: 1px solid;
     border-color: transparent #efe4e4;
 }
+
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/*.tt-dataset-foo {*/
+.tt-suggestion {
+    border: 1px dotted green;
+    padding: 0px;
+    padding-left: 42px;
+    font-size: 16px;
+    /*width: 80%;*/
+    white-space: normal !important;
+    width: 100% !important;
+    white-space: pre-wrap; 
+    word-wrap: break-word;
+    display: block !important;
+    -webkit-hyphens: auto;
+       -moz-hyphens: auto;
+            hyphens: auto;   
+
+    /*position: fixed;
+    bottom: 10px;
+    left: 10px;*/
+}
+
+/*input[type='textarea'] {
+    width: 80%;
+}*/
+
+span.twitter-typeahead {
+    /*width: 80%;*/
+    width: 100%;
+
+}
+
+.syn {
+    color: gray;
+}
+
+/*#results {
+    position: fixed;
+    top: 100px;
+    left: 10px;
+}
+*/
+#your_word {
+    border: 0px dotted red;
+    /*text-align: top;*/
+    height: 200px;
+    width: 100%;
+    font-family: 'Satisfy';
+    font-size: 24px;
+    /*vertical-align: baseline;*/
+    padding: 8px;
+    padding-left: 42px;
+}
+
+.tt-dataset-foo {
+    position: fixed;
+    top: 100px;
+    left: 10px;
+    z-index: 9;     
+    border: 1px dotted red;           
+}
+
+/*.tt-dataset-foo2 {
+    position: fixed;
+    top: 100px;
+    left: 10px;
+    z-index: 9;     
+    border: 1px dotted red;           
+}*/
+
+.transparent {
+    background: transparent;
+    border: 0px solid #d2d2d2;
+    resize: none;
+    outline: none;
+}
+
+p {
+    margins: 0px !important;
+    -webkit-margin-before:0.5em;
+    -webkit-margin-after:0.5em;                
+}
