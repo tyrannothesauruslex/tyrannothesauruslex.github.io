@@ -65,7 +65,7 @@ function initAutoThesaurus() {
             arr = list[0].words;
             new_arr = [];
             for (var i = 0; i < arr.length; i++) {
-              new_arr.push('<span class="syn">' + arr[i] + ' </span> ');
+              new_arr.push(' <span class="syn">' + arr[i] + '</span> ');
             }
 
             // put them back together
