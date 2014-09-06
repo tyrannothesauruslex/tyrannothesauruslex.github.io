@@ -157,15 +157,16 @@ function initAutoThesaurus() {
               ].join(' ')*/
           //}          
         },
+        /*
         {
           name: 'foo2',
           displayKey: 'text',
           menu: '#idDefList',
           source: remoteDefHound.ttAdapter(),
         }
+        */
     );
 
-    //$(document).on('click', '.tt-dropdown-menu,.tt-dataset-foo,.twitter-typeahead,.tt-suggestions,.tt-suggestion p', function(e) {
     $(document).on("click.tt", ".tt-suggestion", function(e) {
         console.log('click.tt, .tt-suggestion', $(this).html() );
         console.log('click.tt, .tt-suggestion', $(this) );
@@ -174,54 +175,4 @@ function initAutoThesaurus() {
         e.stopPropagation();
         e.preventDefault();
     })
-    /*
-    $(document).on('click', '.tt-dataset-foo', function(e) {
-        console.log('click, .tt-dataset-foo', $(this).html() );
-        e.preventDefault();
-    })
-
-    $('*').click(function () {
-        myFunction(this);
-    });
-
-    function myFunction(element) {
-        console.log(element);
-        console.log(element.id);
-        console.log($(element).attr("class"));
-    }*/
-
-    /*$('.tt-dataset-foo').on('mouseenter', '.tt-dataset-foo', function(e) {
-        console.log('mouseenter, .tt-dataset-foo');
-        e.preventDefault();
-    })*/
-    //.on('typeahead:closed', onClosed)
-}
-
-/*function onOpened() {
-    console.log( '.tt-dataset-foo', $('.tt-dataset-foo')[0] );
-}
-function onClosed($e, datum) {
-    console.log('onclosed');
-    //NG: if (!$(".tt-dropdown-menu").is(":visible")) {
-    //    $(".tt-dropdown-menu").show();
-    //}
-}*/
-    /* See also 
-    http://stackoverflow.com/questions/21726756/not-able-to-make-twitter-typeahead-0-10-with-bloodhound-with-prefetch-to-work 
-    http://fusiongrokker.com/post/heavily-customizing-a-bootstrap-typeahead
-    http://brianreavis.github.io/selectize.js/
-    */
-
-
-/*
-var bhResults = new Bloodhound({
-    datumTokenizer: function (d) { return Bloodhound.tokenizers.whitespace(d.num); },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: []
-});
-*/
-/*function typeaheadResults(query, callback) {
-    //console.log(query);
-}*/
-
 
