@@ -51,14 +51,7 @@ function initAutoThesaurus() {
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       prefetch: {
           url: getSynPath(),
-          /*replace: function (response) {
-            console.log('response', response); 
-            return getSynPath();
-          },*/
-          /*filter: function(response) {     
-            console.log('response', response); 
-            return response;
-          }*/
+
       },      
       remote: {
         url: getSynPath(),
@@ -69,27 +62,15 @@ function initAutoThesaurus() {
         // suggestion engine expects JavaScript objects so this converts all of
         // those strings
         filter: function(list) {
-            //return $.map(list, function(country) { return { words: country }; });
-            // list is an array with one element, an object
-            // list[0].words is an array of the words
-            /*console.log(list);
-            console.log(list[0]);
-            console.log(list[0].words);
-            */
             arr = list[0].words;
             new_arr = [];
-            //new_list = '';
             for (var i = 0; i < arr.length; i++) {
               new_arr.push('<span class="syn">' + arr[i] + '</span>');
             }
-            //return arr.join('|');
-            //console.log(arr);
-            
+
             // put them back together
             new_list = [{"words": new_arr}];
-            //list[0].words = new_arr;
-            //console.log('new obj',list[0].words);
-            console.log(new_list);
+            //console.log(new_list);
             return new_list;
         }
       }
