@@ -156,7 +156,7 @@ function initAutoThesaurus() {
                 '<span class="synonym">','displayKey','</span>'
               ].join(' ')*/
           //}          
-        },
+        }//,
         /*
         {
           name: 'foo2',
