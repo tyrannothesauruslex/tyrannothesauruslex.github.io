@@ -2,6 +2,16 @@ var baseUrl = "http://api.wordnik.com/v4/word.json/";
 var apiKey = "a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5"; //demo key from developer.wordnik.com
 var path;
 
+var bht_url = "https://words.bighugelabs.com/api/2/";
+var bht_apikey = "eb4e57bb2c34032da68dfeb3a0578b68";
+/*
+BHT 
+https://words.bighugelabs.com/api/2/eb4e57bb2c34032da68dfeb3a0578b68/eager/json
+returns:
+{"adjective":{"syn":["avid","great","zealous"],"ant":["uneager"],"sim":["anxious","dying","enthusiastic","hot","impatient","overeager","raring"]},"noun":{"syn":["tidal bore","bore","eagre","aegir","tidal current","tidal flow"]}}
+*/
+
+
 var SCHEMAS = {};
 /*SCHEMAS.definitions = array of objects
 definition would be for i++ result[i].text*/
@@ -13,6 +23,21 @@ window.onload = function() {
 };
 
 //$(function() { $('#your_word').focus(); });
+
+function getBHTsynPath() {
+    //console.log( $('#your_word').val() );
+    console.log('getting bht path');
+    var word = extractor( $('#your_word').val() );
+    //if (word.length < 2) { return null; }
+    //console.log( word );
+    var res = $('.tt-dataset-foo2').find('p')[0];
+    //console.log( '.tt-dataset-foo', $(res).html() );
+    //path = bht_url + bht_apikey + '/' + word + '/json?callback=?';
+    path = bht_url + bht_apikey + '/' + word + '/json';
+    //path = baseUrl + word + "/definitions?useCanonical=true&relationshipTypes=synonym&limitPerRelationshipType=100&api_key=" + apiKey;
+    console.log('bht path',path);
+    return path;
+}
 
 function getSynPath() {
     //console.log( $('#your_word').val() );
@@ -80,10 +105,12 @@ function initAutoThesaurus() {
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       prefetch: {
-          url: getDefPath(),
+          //url: getDefPath(),
+          url: getBHTsynPath(),
           replace: function (response) {
             //console.log('response', response); 
-            return getDefPath();
+            //return getDefPath();
+            return getBHTsynPath();
           },
           /*filter: function(response) {     
             //console.log('response', response); 
@@ -91,9 +118,11 @@ function initAutoThesaurus() {
           }*/
       },      
       remote: {
-        url: getDefPath(),
+        //url: getDefPath(),
+        url: getBHTsynPath(),
         replace: function () {
-            return getDefPath();
+            //return getDefPath();
+            return getBHTsynPath();
         },
         filter: function(response) {
             //return $.map(list, function(country) { return { words: country }; });
@@ -136,15 +165,14 @@ function initAutoThesaurus() {
                 '<span class="synonym">','displayKey','</span>'
               ].join(' ')*/
           //}          
-        }//,
-        /*
+        },
         {
           name: 'foo2',
           displayKey: 'text',
           menu: '#idDefList',
-          source: remoteDefHound.ttAdapter(),
+          source: remoteDefHound.ttAdapter(), // todo: remoteBHTsynHound
         }
-        */
+        
     );
 }
 
