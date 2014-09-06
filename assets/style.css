@@ -68,7 +68,8 @@ html, body {
     padding: 0px;
     position: fixed;
     left: 42px;
-    right: 0px;
+    right: 9px;
+    max-width: 500px;
     /* margin-left: 42px; */
     font-size: 16px;
     /*width: 80%;*/
