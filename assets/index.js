@@ -81,7 +81,7 @@ function initAutoThesaurus() {
             //new_list = '';
             for (var i = 0; i < arr.length; i++) {
               new_arr.push('<span class="syn">' + arr[i] + '</span>');
-            };
+            }
             //return arr.join('|');
             //console.log(arr);
             
@@ -165,13 +165,14 @@ function initAutoThesaurus() {
         }
         */
     );
+}
 
-    $(document).on("click.tt", ".tt-suggestion", function(e) {
-        console.log('click.tt, .tt-suggestion', $(this).html() );
-        console.log('click.tt, .tt-suggestion', $(this) );
-        console.log('.paper html', $('.paper').html() );
-        //$(this).show();
-        e.stopPropagation();
-        e.preventDefault();
-    })
+$(document).on("click.tt", ".tt-suggestion", function(e) {
+    console.log('click.tt, .tt-suggestion', $(this).html() );
+    console.log('click.tt, .tt-suggestion', $(this) );
+    console.log('.paper html', $('.paper').html() );
+    //$(this).show();
+    e.stopPropagation();
+    e.preventDefault();
+});
 
