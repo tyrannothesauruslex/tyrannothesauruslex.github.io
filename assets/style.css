@@ -3,6 +3,7 @@ html {
 }
 *, *:before, *:after {
   box-sizing: inherit;
+  color: gray;
 }
 
 .paper {
@@ -110,6 +111,7 @@ span.twitter-typeahead {
 */
 #your_word {
     border: 0px dotted red;
+    color: blue;
     /*text-align: top;*/
     height: 200px;
     width: 100%;

@@ -26,16 +26,14 @@ window.onload = function() {
 
 function getBHTsynPath() {
     //console.log( $('#your_word').val() );
-    console.log('getting bht path');
     var word = extractor( $('#your_word').val() );
     //if (word.length < 2) { return null; }
     //console.log( word );
     var res = $('.tt-dataset-foo2').find('p')[0];
     //console.log( '.tt-dataset-foo', $(res).html() );
     //path = bht_url + bht_apikey + '/' + word + '/json?callback=?';
-    path = bht_url + bht_apikey + '/' + word + '/json';
+    path = bht_url + bht_apikey + '/' + word + '/json?callback=?';
     //path = baseUrl + word + "/definitions?useCanonical=true&relationshipTypes=synonym&limitPerRelationshipType=100&api_key=" + apiKey;
-    console.log('bht path',path);
     return path;
 }
 
@@ -88,7 +86,7 @@ function initAutoThesaurus() {
         // those strings
         filter: function(list) {
             arr = list[0].words;
-            new_arr = [];
+            new_arr = ['{wordnik} '];
             for (var i = 0; i < arr.length; i++) {
               new_arr.push(' <span class="syn">' + arr[i] + '</span>');
             }
@@ -101,7 +99,7 @@ function initAutoThesaurus() {
       }
     });
 
-  var remoteDefHound = new Bloodhound({
+  var remoteBHT_Hound = new Bloodhound({
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       prefetch: {
@@ -125,19 +123,30 @@ function initAutoThesaurus() {
             return getBHTsynPath();
         },
         filter: function(response) {
-            //return $.map(list, function(country) { return { words: country }; });
-            // list is an array with one element, an object
-            // list[0].words is an array of the words
-            console.log(response);
-            console.log(response[0]);
             //console.log(response[0]);
-            return response;
+            // BHT returns obj with keys for each part of speech
+            // each an object with keys ant, sim, syn 
+            // each of which is an array
+            // for now push all syns into one array?
+            new_arr = [];
+            for (var key in response) {
+                new_arr = new_arr.concat(response[key].syn);
+            }
+
+            var newer_arr = ['{bht} '];
+            for (var i = 0; i < new_arr.length; i++) {
+              newer_arr.push(' <span class="syn">' + new_arr[i] + '</span>');
+            }
+
+            new_list = [{"words": newer_arr}];
+            //return response;
+            return new_list;
         }
       }
     });
      
     remoteSynHound.initialize();
-    remoteDefHound.initialize();
+    remoteBHT_Hound.initialize();
      
     /*$('.typeahead').typeahead(null, {
       name: 'foo',
@@ -168,19 +177,20 @@ function initAutoThesaurus() {
         },
         {
           name: 'foo2',
-          displayKey: 'text',
+          //displayKey: 'text',
+          displayKey: 'words',
           menu: '#idDefList',
-          source: remoteDefHound.ttAdapter(), // todo: remoteBHTsynHound
+          source: remoteBHT_Hound.ttAdapter(), // todo: remoteBHTsynHound
         }
         
     );
 }
 
 $(document).on("click.tt", ".tt-suggestion", function(e) {
-    console.log('click.tt, .tt-suggestion', $(this).html() );
+    /*console.log('click.tt, .tt-suggestion', $(this).html() );
     console.log('click.tt, .tt-suggestion', $(this) );
     console.log('.paper html', $('.paper').html() );
-    //$(this).show();
+    *///$(this).show();
     e.stopPropagation();
     e.preventDefault();
 });
