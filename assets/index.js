@@ -72,50 +72,44 @@ function initAutoThesaurus() {
     var remoteSynHound = new Bloodhound({
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-      prefetch: {
+      /*prefetch: {
           url: getSynPath(),
-
       },      
-      remote: {
-        url: getSynPath(),
-        replace: function () {
-            return getSynPath();
-        },
-        // the json file contains an array of strings, but the Bloodhound
-        // suggestion engine expects JavaScript objects so this converts all of
-        // those strings
-        filter: function(list) {
-            arr = list[0].words;
-            new_arr = ['{wordnik} '];
-            for (var i = 0; i < arr.length; i++) {
-              new_arr.push(' <span class="syn">' + arr[i] + '</span>');
-            }
+      */remote: {
+          url: getSynPath(),
+          replace: function () {
+              return getSynPath();
+          },
+          // the json file contains an array of strings, but the Bloodhound
+          // suggestion engine expects JavaScript objects so this converts all of
+          // those strings
+          filter: function(list) {
+              if ( typeof list[0] !== "undefined" && list[0].hasOwnProperty('words') ) {      
+                arr = list[0].words;
+                new_arr = ['{wordnik} '];
+                for (var i = 0; i < arr.length; i++) {
+                  new_arr.push(' <span class="syn">' + arr[i] + '</span>');
+                }
 
-            // put them back together
-            new_list = [{"words": new_arr}];
-            //console.log(new_list);
-            return new_list;
-        }
+                // put them back together
+                new_list = [{"words": new_arr}];
+                //console.log(new_list);
+                return new_list;
+              }
+          }
       }
     });
 
   var remoteBHT_Hound = new Bloodhound({
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-      prefetch: {
-          //url: getDefPath(),
+/*      prefetch: {
           url: getBHTsynPath(),
           replace: function (response) {
-            //console.log('response', response); 
-            //return getDefPath();
             return getBHTsynPath();
           },
-          /*filter: function(response) {     
-            //console.log('response', response); 
-            return response;
-          }*/
       },      
-      remote: {
+*/      remote: {
         //url: getDefPath(),
         url: getBHTsynPath(),
         replace: function () {
@@ -155,12 +149,17 @@ function initAutoThesaurus() {
       source: remoteSynHound.ttAdapter(),
     }); */ 
 
-    $('.typeahead').typeahead(null, 
+    //$('.typeahead').typeahead(null, 
+    $('.typeahead').typeahead(
+        {
+          minLength: 4
+        }, 
         {
           name: 'foo',
           displayKey: 'words',
           //displayKey: 'text',
           menu: '#idSynonymList',
+          //minLength: 4,
           source: remoteSynHound.ttAdapter(),
           //templates: {
               /*empty: [
@@ -180,6 +179,7 @@ function initAutoThesaurus() {
           //displayKey: 'text',
           displayKey: 'words',
           menu: '#idDefList',
+          //minLength: 4,
           source: remoteBHT_Hound.ttAdapter(), // todo: remoteBHTsynHound
         }
         
