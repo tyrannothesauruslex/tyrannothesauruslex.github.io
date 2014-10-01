@@ -161,28 +161,15 @@ function initAutoThesaurus() {
           menu: '#idSynonymList',
           //minLength: 4,
           source: remoteSynHound.ttAdapter(),
-          //templates: {
-              /*empty: [
-                '<div class="empty-message">',
-                '',
-                '</div>'
-              ].join('\n'),*/
-              //suggestion: Handlebars.compile('<p><span class="synonym">{{words}}</span> |</p>')
-              //suggestion: Handlebars.compile(['<span class="synonym">{{words}}</span>'].join('|'))
-              /*suggestion: [
-                '<span class="synonym">','displayKey','</span>'
-              ].join(' ')*/
-          //}          
-        },
+
+        }/*,
         {
           name: 'foo2',
-          //displayKey: 'text',
           displayKey: 'words',
           menu: '#idDefList',
-          //minLength: 4,
-          source: remoteBHT_Hound.ttAdapter(), // todo: remoteBHTsynHound
+          source: remoteBHT_Hound.ttAdapter(),
         }
-        
+        */
     );
 }
 
