@@ -1,3 +1,30 @@
+var mwUrl = "http://www.dictionaryapi.com/api/v1/references/thesaurus/xml/test?key=ee5e16f0-13f9-4750-b9e8-b4fa8a4f860d";
+
+//mwJSON('taste','thesaurus',mwUrl);
+
+/*<?php
+
+// This function grabs the definition of a word in XML format.
+function grab_xml_definition ($word, $ref, $key)
+  { $uri = "http://www.dictionaryapi.com/api/v1/references/" . urlencode($ref) . "/xml/" . 
+          urlencode($word) . "?key=" . urlencode($key);
+    return file_get_contents($uri);
+  };
+
+$xdef = grab_xml_definition("test", "thesaurus", "ee5e16f0-13f9-4750-b9e8-b4fa8a4f860d");
+
+?>*/
+
+function mwJSON (word, ref, key)
+  { uri = "http://www.dictionaryapi.com/api/v1/references/" + encodeURIComponent(ref) + "/json/" + 
+          encodeURIComponent(word) + "?key=" + encodeURIComponent(key);
+    //return file_get_contents(uri);
+    $.getJSON(uri,function(data) {
+      console.log(data);
+    });
+  };
+
+
 var baseUrl = "http://api.wordnik.com/v4/word.json/";
 var apiKey = "a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5"; //demo key from developer.wordnik.com
 var path;
