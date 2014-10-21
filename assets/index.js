@@ -179,8 +179,8 @@ function initAutoThesaurus() {
     //$('.typeahead').typeahead(null, 
     $('.typeahead').typeahead(
         {
-          minLength: 4
-        }, 
+          minLength: 3
+        }/*, 
         {
           name: 'foo',
           displayKey: 'words',
@@ -189,14 +189,13 @@ function initAutoThesaurus() {
           //minLength: 4,
           source: remoteSynHound.ttAdapter(),
 
-        }/*,
+        }*/,
         {
           name: 'foo2',
           displayKey: 'words',
           menu: '#idDefList',
           source: remoteBHT_Hound.ttAdapter(),
         }
-        */
     );
 }
 
