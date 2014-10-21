@@ -157,7 +157,7 @@ function initAutoThesaurus() {
                 new_arr = new_arr.concat(response[key].syn);
             }
 
-            var newer_arr = ['{bht} ' + getBHTsynPath()[0]];
+            var newer_arr = ['<b>{' + getBHTsynPath()[0] + '} </b>];
             for (var i = 0; i < new_arr.length; i++) {
               newer_arr.push(' <span class="syn">' + new_arr[i] + '</span>');
             }
