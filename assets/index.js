@@ -61,7 +61,10 @@ function getBHTsynPath() {
     //path = bht_url + bht_apikey + '/' + word + '/json?callback=?';
     path = bht_url + bht_apikey + '/' + word + '/json?callback=?';
     //path = baseUrl + word + "/definitions?useCanonical=true&relationshipTypes=synonym&limitPerRelationshipType=100&api_key=" + apiKey;
-    return path;
+
+    word_path_arr = [word, path];
+    //return path;
+    return word_path_arr;
 }
 
 function getSynPath() {
@@ -138,10 +141,10 @@ function initAutoThesaurus() {
       },      
 */      remote: {
         //url: getDefPath(),
-        url: getBHTsynPath(),
+        url: getBHTsynPath()[1],
         replace: function () {
             //return getDefPath();
-            return getBHTsynPath();
+            return getBHTsynPath()[1];
         },
         filter: function(response) {
             //console.log(response[0]);
@@ -154,7 +157,7 @@ function initAutoThesaurus() {
                 new_arr = new_arr.concat(response[key].syn);
             }
 
-            var newer_arr = ['{bht} '];
+            var newer_arr = ['{bht} ' + getBHTsynPath()[0]];
             for (var i = 0; i < new_arr.length; i++) {
               newer_arr.push(' <span class="syn">' + new_arr[i] + '</span>');
             }
