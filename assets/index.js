@@ -1,4 +1,16 @@
-var mwUrl = "http://www.dictionaryapi.com/api/v1/references/thesaurus/xml/test?key=ee5e16f0-13f9-4750-b9e8-b4fa8a4f860d";
+//var mwUrl = "http://www.dictionaryapi.com/api/v1/references/thesaurus/xml/test?key=ee5e16f0-13f9-4750-b9e8-b4fa8a4f860d";
+
+var mw_dict_url = 'http://www.dictionaryapi.com/api/v1/references/collegiate/xml/';
+var mw_dict_apikey = '2ec52038-fec7-4619-9a80-59e9310af898'
+
+
+
+var baseUrl = "http://api.wordnik.com/v4/word.json/";
+var apiKey = "a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5"; //demo key from developer.wordnik.com
+var path;
+
+var bht_url = "https://words.bighugelabs.com/api/2/";
+var bht_apikey = "eb4e57bb2c34032da68dfeb3a0578b68";
 
 //mwJSON('taste','thesaurus',mwUrl);
 
@@ -24,13 +36,6 @@ function mwJSON (word, ref, key)
     });
   };
 
-
-var baseUrl = "http://api.wordnik.com/v4/word.json/";
-var apiKey = "a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5"; //demo key from developer.wordnik.com
-var path;
-
-var bht_url = "https://words.bighugelabs.com/api/2/";
-var bht_apikey = "eb4e57bb2c34032da68dfeb3a0578b68";
 /*
 BHT 
 https://words.bighugelabs.com/api/2/eb4e57bb2c34032da68dfeb3a0578b68/eager/json
@@ -152,20 +157,46 @@ function initAutoThesaurus() {
             // each an object with keys ant, sim, syn 
             // each of which is an array
             // for now push all syns into one array?
+
+
+
+
             new_arr = [];
-            for (var key in response) {
+            /*for (var key in response) { //keys: adjective, noun,...
                 new_arr = new_arr.concat(response[key].syn);
+            }*/
+            
+            var newest_str = '<b>{' + getBHTsynPath()[0] + '} </b>';
+
+            var pos_arr = [];
+            var pos_div = '';
+
+            for (var key in response) { //keys: adjective, noun,...
+                pos_div = '<div class="pos-div"> <span class="PoS"><em>' + key + '</em></span>:';
+                var newer_arr = [];
+                //new_arr = new_arr.concat(response[key].syn);
+                if ( response[key].syn ) {
+                    for (var i = 0; i < response[key].syn.length; i++) {
+                        newer_arr.push(' <a href=# onclick="showDef((this.textContent || this.innerText));"><span class="syn">' + response[key].syn[i] + '</a></span>');
+                    }
+                }
+                pos_div += newer_arr.join();
+                pos_div += '</div>'
+                newest_str += pos_div;
             }
 
-            /*var newer_arr = ['<b>{' + getBHTsynPath()[0] + '} </b>'];
-            for (var i = 0; i < new_arr.length; i++) {
+
+            /*for (var i = 0; i < new_arr.length; i++) {
               newer_arr.push(' <span class="syn">' + new_arr[i] + '</span>');
             }*/
 
-            var newest_str = '<b>{' + getBHTsynPath()[0] + '} </b>';
+            //newest_str += newer_arr.join();
+
+
+            /*var newest_str = '<b>{' + getBHTsynPath()[0] + '} </b>';
             for (var i = 0; i < new_arr.length; i++) {
               newest_str += ' <span class="syn">' + new_arr[i] + '</span>';
-            }
+            }*/
 
             //new_list = [{"words": newer_arr}];
             new_list = [{"words": [newest_str] }];
@@ -216,4 +247,20 @@ $(document).on("click.tt", ".tt-suggestion", function(e) {
     e.stopPropagation();
     e.preventDefault();
 });
+
+var TEMP;
+
+function showDef(word) {
+    
+    var res = $('.tt-dataset-foo2').find('p')[0];
+
+    var path = mw_dict_url + word + '?key=' + mw_dict_apikey;
+    //http://www.dictionaryapi.com/api/v1/references/collegiate/xml/test?key=
+
+    word_path_arr = [word, path];
+    //return path;
+    TEMP = path;
+    console.log(TEMP);
+    return word_path_arr;
+}
 
