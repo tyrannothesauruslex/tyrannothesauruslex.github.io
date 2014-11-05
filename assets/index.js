@@ -157,12 +157,18 @@ function initAutoThesaurus() {
                 new_arr = new_arr.concat(response[key].syn);
             }
 
-            var newer_arr = ['<b>{' + getBHTsynPath()[0] + '} </b>'];
+            /*var newer_arr = ['<b>{' + getBHTsynPath()[0] + '} </b>'];
             for (var i = 0; i < new_arr.length; i++) {
               newer_arr.push(' <span class="syn">' + new_arr[i] + '</span>');
+            }*/
+
+            var newest_str = '<b>{' + getBHTsynPath()[0] + '} </b>';
+            for (var i = 0; i < new_arr.length; i++) {
+              newest_str += ' <span class="syn">' + new_arr[i] + '</span>';
             }
 
-            new_list = [{"words": newer_arr}];
+            //new_list = [{"words": newer_arr}];
+            new_list = [{"words": [newest_str] }];
             //return response;
             return new_list;
         }
