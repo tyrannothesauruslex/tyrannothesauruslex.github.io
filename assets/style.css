@@ -64,7 +64,7 @@ html, body {
 
 
 /*.tt-dataset-foo {*/
-.tt-suggestion {
+.tt-suggestion, #syns {
     /* border: 0px dotted green; */
     padding: 0px;
     position: fixed;
